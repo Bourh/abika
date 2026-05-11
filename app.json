@@ -1,12 +1,20 @@
 {
   "expo": {
+    "name": "Abika",
+    "slug": "abika",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "android": {
+      "package": "com.ammmmrbfbjf.abika",
+      "adaptiveIcon": {
+        "backgroundColor": "#0A0A0F"
+      }
+    },
     "extra": {
       "eas": {
         "projectId": "1e46944c-1da4-4b1b-acfd-6c6dc56c65d2"
       }
-    },
-    "android": {
-      "package": "com.ammmmrbfbjf.abika"
     }
   }
 }
