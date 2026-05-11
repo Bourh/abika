@@ -1,28 +1,12 @@
 {
   "expo": {
-    "name": "Abika",
-    "slug": "abika",
-    "version": "1.0.0",
-    "scheme": "abika",
-    "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "userInterfaceStyle": "dark",
-    "splash": {
-      "resizeMode": "contain",
-      "backgroundColor": "#0A0A0F"
-    },
-    "ios": {
-      "supportsTablet": false,
-      "bundleIdentifier": "com.abika.app"
+    "extra": {
+      "eas": {
+        "projectId": "1e46944c-1da4-4b1b-acfd-6c6dc56c65d2"
+      }
     },
     "android": {
-      "adaptiveIcon": {
-        "backgroundColor": "#0A0A0F"
-      },
-      "package": "com.abika.app"
-    },
-    "plugins": [
-      "expo-router"
-    ]
+      "package": "com.ammmmrbfbjf.abika"
+    }
   }
 }

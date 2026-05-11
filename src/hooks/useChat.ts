@@ -1,21 +1,8 @@
-/**
- * useChat HOOK
- * ─────────────
- * Owns all chat interaction logic.
- * The UI is dumb — it just calls this hook and renders what it gets.
- *
- * Responsibilities:
- *   - Build messages list
- *   - Send user message to AI
- *   - Store everything in memory
- *   - Emit events for plugins to react
- *   - Handle loading and error states
- */
-
 import { useState, useCallback } from 'react';
-import { v4 as uuid } from 'uuid';
 import { Message } from '../core/types';
 import { useAbika } from '../context/AbikaContext';
+
+const genId = () => Math.random().toString(36).slice(2) + Date.now().toString(36);
 
 interface UseChatReturn {
   messages: Message[];
@@ -33,42 +20,31 @@ export function useChat(): UseChatReturn {
 
   const sendMessage = useCallback(async (content: string) => {
     if (!isReady || isLoading || !content.trim()) return;
-
     setError(null);
-
-    // 1. Create and store user message
     const userMsg: Message = {
-      id: uuid(),
+      id: genId(),
       role: 'user',
       content: content.trim(),
       timestamp: Date.now(),
     };
-
     core.memory.addMessage(userMsg);
     setMessages(core.memory.getMessages());
     core.events.emit('message:sent', userMsg);
-
     setIsLoading(true);
-
     try {
-      // 2. Call AI with full history
       const response = await core.ai.chat(core.memory.getMessages());
-
-      // 3. Store AI response
       const assistantMsg: Message = {
-        id: uuid(),
+        id: genId(),
         role: 'assistant',
         content: response.content,
         timestamp: Date.now(),
         metadata: { usage: response.usage },
       };
-
       core.memory.addMessage(assistantMsg);
       setMessages(core.memory.getMessages());
       core.events.emit('message:received', assistantMsg);
     } catch (err) {
-      const errorText =
-        err instanceof Error ? err.message : 'Something went wrong';
+      const errorText = err instanceof Error ? err.message : 'Something went wrong';
       setError(errorText);
       core.events.emit('message:error', { error: errorText });
     } finally {
