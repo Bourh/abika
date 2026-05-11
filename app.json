@@ -6,10 +6,7 @@
     "orientation": "portrait",
     "userInterfaceStyle": "dark",
     "android": {
-      "package": "com.ammmmrbfbjf.abika",
-      "adaptiveIcon": {
-        "backgroundColor": "#0A0A0F"
-      }
+      "package": "com.ammmmrbfbjf.abika"
     },
     "extra": {
       "eas": {
